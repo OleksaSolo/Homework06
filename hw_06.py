@@ -40,37 +40,10 @@ def get_categories(file: Path) -> str:
 
 def sort_folder(path: Path) -> None:
     for item in path.glob("**/*"):
-        #print(item)
-        #print(item.stem.find("Archives"))
         if item.is_file():
-            cat = get_categories(item)
-            move_file(item, path, cat)
-    # p_archives = Path(path, "Archives")
-    # print(p_archives.glob('**/*'))
-    # p_audio = Path(path, "Audio")
-    # print(p_audio)
-    # p_video = Path(path, "Video")
-    # print(p_video)
-    # exclude_paths = [p_archives.glob('**/*'), p_audio.glob('**/*'), p_video.glob('**/*')]
-    # all_paths = path.glob('**/*')
-    # filtered_paths = [path for path in all_paths if path not in exclude_paths]   
-    # print(exclude_paths)
-    # print(all_paths)
-    # print(filtered_paths) 
-    #for item in path.glob("**/*"):
-    # for item in path.glob('**/*'):
-    #     if item.stem.find("Archives") == -1: 
-        #if item.is_dir():
-            #if item.stem != "Archives" and item.stem != "Audio":
-                #print(f"dir0 {item.stem}")            
-            #print(f"dir1 {item.stem}")            
-        #else:
-            #if item.stem != "Archives" and item.stem != "Audio":
-                #print(f"dir2 {item.stem}")
-            #if item.is_file():
-                #print(f"file {item.stem}")
-            # cat = get_categories(item)
-            # move_file(item, path, cat)
+            if str(item).find('Archives') == -1 and str(item).find('Video') == -1 and str(item).find('Audio') == -1 and str(item).find('Documents') == -1 and str(item).find('Images') == -1:
+                cat = get_categories(item)
+                move_file(item, path, cat)
 
 def delete_emtpy_dirs(path: Path) -> None:
     for item in path.glob("**/*"):
